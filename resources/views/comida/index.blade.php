@@ -67,8 +67,8 @@
                     </div>
                 </div>
 
-                <div id="calories-container">
-                    Total de calorías seleccionadas: <span id="total-calories">0</span>
+                <div id="calories-container" style="font-size: 24px; font-weight: bold; color: red;">
+                    Total de calorías seleccionadas: <span id="total-calories"style="font-size: 24px; font-weight: bold; color: red;" >0</span>
                 </div>
             </div>
         </div>
