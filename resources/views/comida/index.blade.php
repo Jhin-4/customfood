@@ -15,11 +15,11 @@
                                 {{ __('Comida') }}
                             </span>
 
-                            <div class="float-right">
+                        @auth    <div class="float-right">
                                 <a href="{{ route('comida.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                     {{ __('Create New') }}
                                 </a>
-                            </div>
+                            </div> @endauth
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -52,18 +52,18 @@
                                                 </center>
                                             </td>
                                             <td>
-                                                <form action="{{ route('comida.destroy', $comida->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('comida.show', $comida->id) }}">
+                                              <form action="{{ route('comida.destroy', $comida->id) }}" method="POST">
+                                              @auth   <a class="btn btn-sm btn-primary" href="{{ route('comida.show', $comida->id) }}">
                                                         <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
-                                                    </a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('comida.edit', $comida->id) }}">
+                                                    </a>@endauth 
+                                                    @auth   <a class="btn btn-sm btn-success" href="{{ route('comida.edit', $comida->id) }}">
                                                         <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
-                                                    </a>
+                                                    </a>@endauth 
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                    @auth    <button type="submit" class="btn btn-danger btn-sm">
                                                         <i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
-                                                    </button>
+                                                    </button>@endauth 
                                                 </form>
                                             </td>
                                             <td>
@@ -95,8 +95,15 @@
                 <form action="{{ route('comida.guardarpedido') }}" method="POST">
                     @csrf
                     <input type="hidden" name="selected_ids" id="selected_ids">
-                    <button type="submit" class="btn btn-primary">Enviar Pedidos</button>
+                    <button type="submit" class="btn btn-primary">Enviar Pedido</button>
                 </form>
+                <br>
+                                <!-- Formulario para enviar pedidos -->
+                 @auth               <form action="{{ route('comida.guardarpedido') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="selected_ids" id="selected_ids">
+                    <button type="submit" class="btn btn-primary">Revisar pedidos</button>
+                </form> @endauth
             </div>
         </div>
     </div>
