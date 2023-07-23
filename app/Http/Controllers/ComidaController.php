@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Pedido; // Agregar esta línea
 use App\Models\Comida;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 /**
  * Class ComidaController
@@ -128,7 +130,7 @@ if( $request->hasFile('imagen')){
 
         $comida->update($request->all());
 
-        return redirect()->route('comidas.index')
+        return redirect()->route('comida.index')
             ->with('success', 'Comida updated successfully');
     }
 
@@ -143,6 +145,27 @@ if( $request->hasFile('imagen')){
 
         return redirect()->route('comida.index')
             ->with('success', 'Comida deleted successfully');
+    }
+
+    public function guardarPedido(Request $request)
+    {
+        $selectedIdsString = $request->input('selected_ids', '');
+        $selectedIdsArray = explode(',', $selectedIdsString);
+
+        $complemento1 = in_array('6', $selectedIdsArray) ? 'Verdura' : null;
+        $complemento2 = in_array('7', $selectedIdsArray) ? 'Arroz' : null;
+
+        DB::table('pedidos')->insert([
+            'comida' => 'pechuga de pollo',
+            'complemento1' => $complemento1,
+            'complemento2' => $complemento2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Resto del código...
+
+        return redirect()->route('comida.index')->with('success', 'Pedidos enviados correctamente.');
     }
     
 }

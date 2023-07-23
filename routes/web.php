@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ComidaController;
+use App\Models\Pedido; // Asegúrate de importar el modelo Pedido
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('comida', ComidaController::class);
 Route::post('/comida/calculate', [ComidaController::class, 'calculate'])->name('comida.calculate');
+Route::post('/comida/guardar_pedidos', [ComidaController::class, 'guardarPedido'])->name('comida.guardarpedido');
+
 
 
 
