@@ -80,23 +80,23 @@
         <div class="menu-item">
         <center><img src="images/1689692175-1689373217-PHOTO-2023-07-14-14-01-42.jpg" alt="Item 1" class="item-image"></center>
             <h3>Pechuga de pollo </h3>
-            <p>Pechuga de pollo con acompañamiento</p>
+            <p>Pechuga de pollo con acompañamiento Calorias:165</p>
             <p>Precio: $100</p>
             <a href="comida/" class="button">Elige tus ingredientes</a>
         </div>
         <div class="menu-item">
-        <center><img src="images/1689692175-1689373217-PHOTO-2023-07-14-14-01-42.jpg" alt="Item 1" class="item-image"></center>
-            <h3>Item 2</h3>
-            <p>Description of Item 2</p>
-            <p>Price: $12</p>
+        <center><img src="images/caldo_res.jpg" alt="Item 1" class="item-image"></center>
+            <h3>Caldo de res</h3>
+            <p>Caldo de res con acompañamiento Calorias:173</p>
+            <p>Price: $100</p>
             <a href="comida/" class="button">Elige tus ingredientes</a>
 
         </div>
         <div class="menu-item">
         <center><img src="images/1689692175-1689373217-PHOTO-2023-07-14-14-01-42.jpg" alt="Item 1" class="item-image"></center>
-            <h3>Item 3</h3>
-            <p>Description of Item 3</p>
-            <p>Price: $15</p>
+            <h3>Caldo de pollo</h3>
+            <p>Caldo de res con acompañamiento Calorias:36</p>
+            <p>Price: $75</p>
             <a href="comida/" class="button">Elige tus ingredientes</a>
 
         </div>
