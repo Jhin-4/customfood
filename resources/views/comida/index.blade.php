@@ -98,8 +98,8 @@
                     <button type="submit" class="btn btn-primary">Enviar Pedido</button>
                 </form>
                 <br>
-                                <!-- Formulario para enviar pedidos -->
-                 @auth               <form action="{{ route('comida.guardarpedido') }}" method="POST">
+                                <!-- Visualizar pedidos -->
+                 @auth               <form action="{{ route('pedidos.index') }}" method="GET">
                     @csrf
                     <input type="hidden" name="selected_ids" id="selected_ids">
                     <button type="submit" class="btn btn-primary">Revisar pedidos</button>
