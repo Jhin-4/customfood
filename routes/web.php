@@ -29,8 +29,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('comida', ComidaController::class);
 Route::resource('camaron', CamaronController::class);
 Route::resource('mojarra', MojarraController::class);
-
-
+Route::post('/mojarracalculate', [CamaronController::class, 'calculate'])->name('mojarra.calculate');
+Route::post('/mojarra/guardar_pedidos', [CamaronController::class, 'guardarPedido'])->name('mojarra.guardarpedido');
+Route::post('/camaron/calculate', [CamaronController::class, 'calculate'])->name('camaron.calculate');
+Route::post('/camaron/guardar_pedidos', [CamaronController::class, 'guardarPedido'])->name('camaron.guardarpedido');
 Route::post('/comida/calculate', [ComidaController::class, 'calculate'])->name('comida.calculate');
 Route::post('/comida/guardar_pedidos', [ComidaController::class, 'guardarPedido'])->name('comida.guardarpedido');
 Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');

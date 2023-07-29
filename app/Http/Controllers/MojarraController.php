@@ -11,6 +11,23 @@ use Illuminate\Http\Request;
  */
 class MojarraController extends Controller
 {
+    public function calculate(Request $request)
+    {
+        $selected = $request->input('selected', []);
+        $totalCalories = 0;
+        
+        // Recorre los registros seleccionados y suma las calorías
+        foreach ($selected as $id) {
+            $comida = Comida::find($id);
+            if ($comida) {
+                $totalCalories += $comida->calorias;
+            }
+        }
+        
+        return response()->json([
+            'totalCalories' => $totalCalories
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,12 +60,33 @@ class MojarraController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Mojarra::$rules);
 
-        $mojarra = Mojarra::create($request->all());
+        $request->validate([
+            'imagen' => 'required|image|max:2048'
+        ]);
 
-        return redirect()->route('mojarras.index')
-            ->with('success', 'Mojarra created successfully.');
+        $comida = new Comida();
+
+
+if( $request->hasFile('imagen')){
+    $file=$request->file('imagen');
+    $destinationpath='images/';
+    $filename=time() . '-' . $file->getClientOriginalName();
+    $uploadSucces=$request->file('imagen')->move($destinationpath, $filename);
+    $comida->imagen =$destinationpath . $filename ;
+}
+
+        
+        $comida->nombre = $request->input('nombre');
+        $comida->calorias = $request->input('calorias');
+
+
+       
+
+        $comida->save();
+
+        return redirect()->route('comida.index')
+            ->with('success', 'Comida created successfully.');
     }
 
     /**
@@ -106,4 +144,25 @@ class MojarraController extends Controller
         return redirect()->route('mojarras.index')
             ->with('success', 'Mojarra deleted successfully');
     }
+    
+    public function guardarPedido(Request $request)
+    {
+        $selectedIdsString = $request->input('selected_ids', '');
+        $selectedIdsArray = explode(',', $selectedIdsString);
+
+        $complemento1 = in_array('1', $selectedIdsArray) ? 'Verdura' : null;
+        $complemento2 = in_array('2', $selectedIdsArray) ? 'Arroz' : null;
+
+        DB::table('pedidos')->insert([
+            'comida' => $comida,
+            'complemento1' => $complemento1,
+            'complemento2' => $complemento2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+
+        return redirect()->route('mojarra.index')->with('success', 'Pedidos enviados correctamente.');
+    }
+    
 }
