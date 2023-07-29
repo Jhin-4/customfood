@@ -80,23 +80,23 @@
         <div class="menu-item">
         <center><img src="images/1689692175-1689373217-PHOTO-2023-07-14-14-01-42.jpg" alt="Item 1" class="item-image"></center>
             <h3>Pechuga de pollo </h3>
-            <p>Pechuga de pollo con acompañamiento</p>
+            <p>Pechuga de pollo con arroz y verduras</p>
             <p>Precio: $100</p>
             <a href="comida/" class="button">Elige tus ingredientes</a>
         </div>
         <div class="menu-item">
-        <center><img src="images/1689692175-1689373217-PHOTO-2023-07-14-14-01-42.jpg" alt="Item 1" class="item-image"></center>
-            <h3>Item 2</h3>
-            <p>Description of Item 2</p>
-            <p>Price: $12</p>
+        <center><img src="images/1689698382-1689372987-PHOTO-2023-07-14-14-01-41.jpg" alt="Item 1" class="item-image"></center>
+            <h3>Sopa de camarones</h3>
+            <p>Sopa de camarones con arroz y verduras</p>
+            <p>Price: $120</p>
             <a href="comida/" class="button">Elige tus ingredientes</a>
 
         </div>
         <div class="menu-item">
-        <center><img src="images/1689692175-1689373217-PHOTO-2023-07-14-14-01-42.jpg" alt="Item 1" class="item-image"></center>
-            <h3>Item 3</h3>
-            <p>Description of Item 3</p>
-            <p>Price: $15</p>
+        <center><img src="images/mojarra.jpg" alt="Item 1" class="item-image"></center>
+            <h3>Mojarra frita</h3>
+            <p>Mojarra frita con arroz y verduras</p>
+            <p>Price: $150</p>
             <a href="comida/" class="button">Elige tus ingredientes</a>
 
         </div>

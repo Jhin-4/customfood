@@ -163,7 +163,6 @@ if( $request->hasFile('imagen')){
             'updated_at' => now(),
         ]);
 
-        // Resto del código...
 
         return redirect()->route('comida.index')->with('success', 'Pedidos enviados correctamente.');
     }
