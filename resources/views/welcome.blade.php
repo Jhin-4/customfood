@@ -89,7 +89,7 @@
             <h3>Sopa de camarones</h3>
             <p>Sopa de camarones con arroz y verduras</p>
             <p>Price: $120</p>
-            <center>  <a href="comida/" class="button">Elige tus ingredientes</a></center>
+            <center>  <a href="camaron/" class="button">Elige tus ingredientes</a></center>
 
         </div>
         <div class="menu-item">
@@ -97,7 +97,7 @@
             <h3>Mojarra frita</h3>
             <p>Mojarra frita con arroz y verduras</p>
             <p>Price: $150</p>
-            <center><a href="comida/" class="button">Elige tus ingredientes</a></center>
+            <center><a href="mojarra/" class="button">Elige tus ingredientes</a></center>
 
         </div>
 
