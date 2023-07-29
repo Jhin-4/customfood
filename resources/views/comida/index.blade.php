@@ -15,11 +15,13 @@
                                 {{ __('Comida') }}
                             </span>
 
-                        @auth    <div class="float-right">
+                        @auth
+                            <div class="float-right">
                                 <a href="{{ route('comida.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                     {{ __('Create New') }}
                                 </a>
-                            </div> @endauth
+                            </div>
+                        @endauth
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -52,18 +54,22 @@
                                                 </center>
                                             </td>
                                             <td>
-                                              <form action="{{ route('comida.destroy', $comida->id) }}" method="POST">
-                                              @auth   <a class="btn btn-sm btn-primary" href="{{ route('comida.show', $comida->id) }}">
-                                                        <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
-                                                    </a>@endauth 
-                                                    @auth   <a class="btn btn-sm btn-success" href="{{ route('comida.edit', $comida->id) }}">
-                                                        <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
-                                                    </a>@endauth 
+                                                <form action="{{ route('comida.destroy', $comida->id) }}" method="POST">
+                                                    @auth
+                                                        <a class="btn btn-sm btn-primary" href="{{ route('comida.show', $comida->id) }}">
+                                                            <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
+                                                        </a>
+                                                        <a class="btn btn-sm btn-success" href="{{ route('comida.edit', $comida->id) }}">
+                                                            <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
+                                                        </a>
+                                                    @endauth 
                                                     @csrf
                                                     @method('DELETE')
-                                                    @auth    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
-                                                    </button>@endauth 
+                                                    @auth
+                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                            <i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
+                                                        </button>
+                                                    @endauth 
                                                 </form>
                                             </td>
                                             <td>
@@ -79,18 +85,19 @@
                             </table>
                         </div>
                     </div>
+                    
+                    <!-- Footer de la card con el botón "Información Nutricional" -->
+                    <div class="card-footer">
+                        <button class="btn btn-primary" onclick="showNutritionalInformation()">
+                            Información Nutricional
+                        </button>
+                    </div>
                 </div>
 
                 <div id="calories-container" style="font-size: 24px; font-weight: bold; color: green;">
                     Total de calorías seleccionadas: <span id="total-calories" style="font-size: 24px; font-weight: bold; color: black;">0</span>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
                 <!-- Formulario para enviar pedidos -->
                 <form action="{{ route('comida.guardarpedido') }}" method="POST">
                     @csrf
@@ -98,51 +105,28 @@
                     <button type="submit" class="btn btn-primary">Enviar Pedido</button>
                 </form>
                 <br>
-                                <!-- Visualizar pedidos -->
-                 @auth               <form action="{{ route('pedidos.index') }}" method="GET">
+                <!-- Visualizar pedidos -->
+                @auth
+                <form action="{{ route('pedidos.index') }}" method="GET">
                     @csrf
                     <input type="hidden" name="selected_ids" id="selected_ids">
                     <button type="submit" class="btn btn-primary">Revisar pedidos</button>
-                </form> @endauth
+                </form>
+                @endauth
             </div>
         </div>
     </div>
 
-    <script>
-    function calculateCalories() {
-        var checkboxes = document.querySelectorAll('input[name="selected[]"]');
-        var totalCalories = 0;
+    <!-- Ventana modal para mostrar la información nutricional -->
+    <div id="modal-container" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideModal()">&times;</span>
+            <img src="{{ asset('images/1689692175-1689373217-PHOTO-2023-07-14-14-01-42.jpg') }}" alt="Información Nutricional">
+        </div>
+    </div>
 
-        checkboxes.forEach(function(checkbox) {
-            if (checkbox.checked) {
-                var row = checkbox.closest('tr');
-                var calories = parseInt(row.querySelector('td:nth-child(3)').textContent);
-
-                totalCalories += calories;
-            }
-        });
-
-        document.getElementById('total-calories').textContent = totalCalories;
-        updateSelectedIds();
-    }
-
-    function updateSelectedIds() {
-        var checkboxes = document.querySelectorAll('input[name="selected[]"]');
-        var selectedIds = [];
-
-        checkboxes.forEach(function(checkbox) {
-            if (checkbox.checked) {
-                selectedIds.push(checkbox.value);
-            }
-        });
-
-        // Filtrar los elementos vacíos antes de asignarlos al campo oculto
-        selectedIds = selectedIds.filter(function(id) {
-            return id !== '';
-        });
-
-        document.getElementById('selected_ids').value = selectedIds.join(',');
-    }
-</script>
+    <!-- Referencia a los archivos CSS y JavaScript -->
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <script src="{{ asset('css/script.js') }}"></script>
 
 @endsection
