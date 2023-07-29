@@ -1,17 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Pedido; // Agregar esta línea
-use App\Models\Comida;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
+use App\Models\Camaron;
+use Illuminate\Http\Request;
 
 /**
- * Class ComidaController
+ * Class CamaronController
  * @package App\Http\Controllers
  */
-class ComidaController extends Controller
+class CamaronController extends Controller
 {
     public function calculate(Request $request)
     {
@@ -30,6 +28,7 @@ class ComidaController extends Controller
             'totalCalories' => $totalCalories
         ]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,10 +36,10 @@ class ComidaController extends Controller
      */
     public function index()
     {
-        $comidas = Comida::paginate();
+        $camarons = Camaron::paginate();
 
-        return view('comida.index', compact('comidas'))
-            ->with('i', (request()->input('page', 1) - 1) * $comidas->perPage());
+        return view('camaron.index', compact('camarons'))
+            ->with('i', (request()->input('page', 1) - 1) * $camarons->perPage());
     }
 
     /**
@@ -50,8 +49,8 @@ class ComidaController extends Controller
      */
     public function create()
     {
-        $comida = new Comida();
-        return view('comida.create', compact('comida'));
+        $camaron = new Camaron();
+        return view('camaron.create', compact('camaron'));
     }
 
     /**
@@ -62,7 +61,6 @@ class ComidaController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'imagen' => 'required|image|max:2048'
         ]);
@@ -99,9 +97,9 @@ if( $request->hasFile('imagen')){
      */
     public function show($id)
     {
-        $comida = Comida::find($id);
+        $camaron = Camaron::find($id);
 
-        return view('comida.show', compact('comida'));
+        return view('camaron.show', compact('camaron'));
     }
 
     /**
@@ -112,26 +110,26 @@ if( $request->hasFile('imagen')){
      */
     public function edit($id)
     {
-        $comida = Comida::find($id);
+        $camaron = Camaron::find($id);
 
-        return view('comida.edit', compact('comida'));
+        return view('camaron.edit', compact('camaron'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Comida $comida
+     * @param  Camaron $camaron
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comida $comida)
+    public function update(Request $request, Camaron $camaron)
     {
-        request()->validate(Comida::$rules);
+        request()->validate(Camaron::$rules);
 
-        $comida->update($request->all());
+        $camaron->update($request->all());
 
-        return redirect()->route('comida.index')
-            ->with('success', 'Comida updated successfully');
+        return redirect()->route('camarons.index')
+            ->with('success', 'Camaron updated successfully');
     }
 
     /**
@@ -141,12 +139,11 @@ if( $request->hasFile('imagen')){
      */
     public function destroy($id)
     {
-        $comida = Comida::find($id)->delete();
+        $camaron = Camaron::find($id)->delete();
 
-        return redirect()->route('comida.index')
-            ->with('success', 'Comida deleted successfully');
+        return redirect()->route('camarons.index')
+            ->with('success', 'Camaron deleted successfully');
     }
-
     public function guardarPedido(Request $request)
     {
         $selectedIdsString = $request->input('selected_ids', '');
@@ -166,5 +163,4 @@ if( $request->hasFile('imagen')){
 
         return redirect()->route('comida.index')->with('success', 'Pedidos enviados correctamente.');
     }
-    
 }

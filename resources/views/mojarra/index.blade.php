@@ -17,7 +17,7 @@
 
                         @auth
                             <div class="float-right">
-                                <a href="{{ route('comida.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                                <a href="{{ route('mojarra.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                     {{ __('Create New') }}
                                 </a>
                             </div>
@@ -43,23 +43,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($comidas as $comida)
+                                    @foreach ($mojarras as $mojarra)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $comida->nombre }}</td>
-                                            <td>{{ $comida->calorias }}</td>
+                                            <td>{{ $mojarra->nombre }}</td>
+                                            <td>{{ $mojarra->calorias }}</td>
                                             <td>
                                                 <center>
-                                                    <img src="{{ asset($comida->imagen) }}" alt="{{ $comida->title }}" style="max-width: 100px; height: 100px;">
+                                                    <img src="{{ asset($mojarra->imagen) }}" alt="{{ $mojarra->title }}" style="max-width: 100px; height: 100px;">
                                                 </center>
                                             </td>
                                             <td>
-                                                <form action="{{ route('comida.destroy', $comida->id) }}" method="POST">
+                                                <form action="{{ route('mojarra.destroy', $mojarra->id) }}" method="POST">
                                                     @auth
-                                                        <a class="btn btn-sm btn-primary" href="{{ route('comida.show', $comida->id) }}">
+                                                        <a class="btn btn-sm btn-primary" href="{{ route('mojarra.show', $mojarra->id) }}">
                                                             <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
                                                         </a>
-                                                        <a class="btn btn-sm btn-success" href="{{ route('comida.edit', $comida->id) }}">
+                                                        <a class="btn btn-sm btn-success" href="{{ route('mojarra.edit', $mojarra->id) }}">
                                                             <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
                                                         </a>
                                                     @endauth 
@@ -75,7 +75,7 @@
                                             <td>
                                                 <!-- Checkbox personalizado -->
                                                 <label class="custom-checkbox">
-                                                    <input type="checkbox" name="selected[]" value="{{ $comida->id }}" onchange="calculateCalories()">
+                                                    <input type="checkbox" name="selected[]" value="{{ $mojarra->id }}" onchange="calculateCalories()">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </td>
@@ -99,7 +99,7 @@
                 </div>
 
                 <!-- Formulario para enviar pedidos -->
-                <form action="{{ route('comida.guardarpedido') }}" method="POST">
+                <form action="{{ route('mojarra.guardarpedido') }}" method="POST">
                     @csrf
                     <input type="hidden" name="selected_ids" id="selected_ids">
                     <button type="submit" class="btn btn-primary">Enviar Pedido</button>
@@ -107,7 +107,7 @@
                 <br>
                 <!-- Visualizar pedidos -->
                 @auth
-                <form action="{{ route('pedidos.index') }}" method="GET">
+                <form action="{{ route('mojarra.index') }}" method="GET">
                     @csrf
                     <input type="hidden" name="selected_ids" id="selected_ids">
                     <button type="submit" class="btn btn-primary">Revisar pedidos</button>

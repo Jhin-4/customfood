@@ -1,17 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Pedido; // Agregar esta línea
-use App\Models\Comida;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
+use App\Models\Mojarra;
+use Illuminate\Http\Request;
 
 /**
- * Class ComidaController
+ * Class MojarraController
  * @package App\Http\Controllers
  */
-class ComidaController extends Controller
+class MojarraController extends Controller
 {
     public function calculate(Request $request)
     {
@@ -37,10 +35,10 @@ class ComidaController extends Controller
      */
     public function index()
     {
-        $comidas = Comida::paginate();
+        $mojarras = Mojarra::paginate();
 
-        return view('comida.index', compact('comidas'))
-            ->with('i', (request()->input('page', 1) - 1) * $comidas->perPage());
+        return view('mojarra.index', compact('mojarras'))
+            ->with('i', (request()->input('page', 1) - 1) * $mojarras->perPage());
     }
 
     /**
@@ -50,8 +48,8 @@ class ComidaController extends Controller
      */
     public function create()
     {
-        $comida = new Comida();
-        return view('comida.create', compact('comida'));
+        $mojarra = new Mojarra();
+        return view('mojarra.create', compact('mojarra'));
     }
 
     /**
@@ -99,9 +97,9 @@ if( $request->hasFile('imagen')){
      */
     public function show($id)
     {
-        $comida = Comida::find($id);
+        $mojarra = Mojarra::find($id);
 
-        return view('comida.show', compact('comida'));
+        return view('mojarra.show', compact('mojarra'));
     }
 
     /**
@@ -112,26 +110,26 @@ if( $request->hasFile('imagen')){
      */
     public function edit($id)
     {
-        $comida = Comida::find($id);
+        $mojarra = Mojarra::find($id);
 
-        return view('comida.edit', compact('comida'));
+        return view('mojarra.edit', compact('mojarra'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Comida $comida
+     * @param  Mojarra $mojarra
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comida $comida)
+    public function update(Request $request, Mojarra $mojarra)
     {
-        request()->validate(Comida::$rules);
+        request()->validate(Mojarra::$rules);
 
-        $comida->update($request->all());
+        $mojarra->update($request->all());
 
-        return redirect()->route('comida.index')
-            ->with('success', 'Comida updated successfully');
+        return redirect()->route('mojarras.index')
+            ->with('success', 'Mojarra updated successfully');
     }
 
     /**
@@ -141,12 +139,12 @@ if( $request->hasFile('imagen')){
      */
     public function destroy($id)
     {
-        $comida = Comida::find($id)->delete();
+        $mojarra = Mojarra::find($id)->delete();
 
-        return redirect()->route('comida.index')
-            ->with('success', 'Comida deleted successfully');
+        return redirect()->route('mojarras.index')
+            ->with('success', 'Mojarra deleted successfully');
     }
-
+    
     public function guardarPedido(Request $request)
     {
         $selectedIdsString = $request->input('selected_ids', '');
@@ -156,7 +154,7 @@ if( $request->hasFile('imagen')){
         $complemento2 = in_array('2', $selectedIdsArray) ? 'Arroz' : null;
 
         DB::table('pedidos')->insert([
-            'comida' => 'pechuga de pollo',
+            'comida' => $comida,
             'complemento1' => $complemento1,
             'complemento2' => $complemento2,
             'created_at' => now(),
@@ -164,7 +162,7 @@ if( $request->hasFile('imagen')){
         ]);
 
 
-        return redirect()->route('comida.index')->with('success', 'Pedidos enviados correctamente.');
+        return redirect()->route('mojarra.index')->with('success', 'Pedidos enviados correctamente.');
     }
     
 }
