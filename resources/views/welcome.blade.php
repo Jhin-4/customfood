@@ -80,7 +80,7 @@
         <div class="menu-item">
         <center><img src="images/1689692175-1689373217-PHOTO-2023-07-14-14-01-42.jpg" alt="Item 1" class="item-image"></center>
             <h3>Pechuga de pollo </h3>
-            <p>Pechuga de pollo con arroz y verduras</p>
+            <p>Pechuga de pollo con arroz y verdura</p>
             <p>Precio: $100</p>
             <center> <a href="comida/" class="button">Elige tus ingredientes</a></center>
         </div>
