@@ -1,70 +1,83 @@
+@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
+    Mojarra
     Comida
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
+@ -11,16 +11,17 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
+
                             <span id="card_title">
+                                {{ __('Mojarra') }}
                                 {{ __('Comida') }}
                             </span>
 
+                             <div class="float-right">
+                                <a href="{{ route('mojarra.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
                         @auth
                             <div class="float-right">
-                                <a href="{{ route('comida.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                                <a href="{{ route('mojarra.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                     {{ __('Create New') }}
                                 </a>
+                              </div>
                             </div>
                         @endauth
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+@ -35,11 +36,9 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
+                                        
+										<th>Nombre</th>
+										<th>Calorias</th>
+										<th>Imagen</th>
+
                                         <th>Nombre</th>
                                         <th>Calorias</th>
                                         <th>Imagen</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($comidas as $comida)
+@ -47,29 +46,87 @@
+                                    @foreach ($mojarras as $mojarra)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $comida->nombre }}</td>
-                                            <td>{{ $comida->calorias }}</td>
+                                            
+											<td>{{ $mojarra->nombre }}</td>
+											<td>{{ $mojarra->calorias }}</td>
+											<td>{{ $mojarra->imagen }}</td>
+
+                                            <td>{{ $mojarra->nombre }}</td>
+                                            <td>{{ $mojarra->calorias }}</td>
                                             <td>
                                                 <center>
-                                                    <img src="{{ asset($comida->imagen) }}" alt="{{ $comida->title }}" style="max-width: 100px; height: 100px;">
+                                                    <img src="{{ asset($mojarra->imagen) }}" alt="{{ $mojarra->title }}" style="max-width: 100px; height: 100px;">
                                                 </center>
                                             </td>
                                             <td>
-                                                <form action="{{ route('comida.destroy', $comida->id) }}" method="POST">
+                                                <form action="{{ route('mojarra.destroy',$mojarra->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('mojarra.show',$mojarra->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('mojarra.edit',$mojarra->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('mojarra.destroy', $mojarra->id) }}" method="POST">
                                                     @auth
-                                                        <a class="btn btn-sm btn-primary" href="{{ route('comida.show', $comida->id) }}">
+                                                        <a class="btn btn-sm btn-primary" href="{{ route('mojarra.show', $mojarra->id) }}">
                                                             <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
                                                         </a>
-                                                        <a class="btn btn-sm btn-success" href="{{ route('comida.edit', $comida->id) }}">
+                                                        <a class="btn btn-sm btn-success" href="{{ route('mojarra.edit', $mojarra->id) }}">
                                                             <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
                                                         </a>
                                                     @endauth 
                                                     @csrf
                                                     @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                     @auth
                                                         <button type="submit" class="btn btn-danger btn-sm">
                                                             <i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
@@ -75,7 +88,7 @@
                                             <td>
                                                 <!-- Checkbox personalizado -->
                                                 <label class="custom-checkbox">
-                                                    <input type="checkbox" name="selected[]" value="{{ $comida->id }}" onchange="calculateCalories()">
+                                                    <input type="checkbox" name="selected[]" value="{{ $mojarra->id }}" onchange="calculateCalories()">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </td>
@@ -93,13 +106,14 @@
                         </button>
                     </div>
                 </div>
+                {!! $mojarras->links() !!}
 
                 <div id="calories-container" style="font-size: 24px; font-weight: bold; color: green;">
                     Total de calorías seleccionadas: <span id="total-calories" style="font-size: 24px; font-weight: bold; color: black;">0</span>
                 </div>
 
                 <!-- Formulario para enviar pedidos -->
-                <form action="{{ route('comida.guardarpedido') }}" method="POST">
+                <form action="{{ route('mojarra.guardarpedido') }}" method="POST">
                     @csrf
                     <input type="hidden" name="selected_ids" id="selected_ids">
                     <button type="submit" class="btn btn-primary">Enviar Pedido</button>
@@ -107,7 +121,7 @@
                 <br>
                 <!-- Visualizar pedidos -->
                 @auth
-                <form action="{{ route('pedidos.index') }}" method="GET">
+                <form action="{{ route('mojarra.index') }}" method="GET">
                     @csrf
                     <input type="hidden" name="selected_ids" id="selected_ids">
                     <button type="submit" class="btn btn-primary">Revisar pedidos</button>
