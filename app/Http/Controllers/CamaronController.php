@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\Pedido; // Agregar esta línea
 use App\Models\Camaron;
 use Illuminate\Http\Request;
 
@@ -65,7 +66,7 @@ class CamaronController extends Controller
             'imagen' => 'required|image|max:2048'
         ]);
 
-        $comida = new Comida();
+        $camaron = new Camaron();
 
 
 if( $request->hasFile('imagen')){
@@ -73,17 +74,17 @@ if( $request->hasFile('imagen')){
     $destinationpath='images/';
     $filename=time() . '-' . $file->getClientOriginalName();
     $uploadSucces=$request->file('imagen')->move($destinationpath, $filename);
-    $comida->imagen =$destinationpath . $filename ;
+    $camaron->imagen =$destinationpath . $filename ;
 }
 
         
-        $comida->nombre = $request->input('nombre');
-        $comida->calorias = $request->input('calorias');
+        $camaron->nombre = $request->input('nombre');
+        $camaron->calorias = $request->input('calorias');
 
 
        
 
-        $comida->save();
+        $camaron->save();
 
         return redirect()->route('comida.index')
             ->with('success', 'Comida created successfully.');
@@ -141,7 +142,7 @@ if( $request->hasFile('imagen')){
     {
         $camaron = Camaron::find($id)->delete();
 
-        return redirect()->route('camarons.index')
+        return redirect()->route('camaron.index')
             ->with('success', 'Camaron deleted successfully');
     }
     public function guardarPedido(Request $request)
@@ -153,7 +154,7 @@ if( $request->hasFile('imagen')){
         $complemento2 = in_array('2', $selectedIdsArray) ? 'Arroz' : null;
 
         DB::table('pedidos')->insert([
-            'comida' => 'pechuga de pollo',
+            'comida' => 'Sopa de camaron',
             'complemento1' => $complemento1,
             'complemento2' => $complemento2,
             'created_at' => now(),

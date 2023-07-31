@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Pedido; // Agregar esta línea
 use App\Models\Mojarra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class MojarraController
@@ -18,9 +19,9 @@ class MojarraController extends Controller
         
         // Recorre los registros seleccionados y suma las calorías
         foreach ($selected as $id) {
-            $comida = Comida::find($id);
-            if ($comida) {
-                $totalCalories += $comida->calorias;
+            $mojarra = Comida::find($id);
+            if ($mojarra) {
+                $totalCalories += $mojarra->calorias;
             }
         }
         
@@ -65,7 +66,7 @@ class MojarraController extends Controller
             'imagen' => 'required|image|max:2048'
         ]);
 
-        $comida = new Comida();
+        $mojarra = new Mojarra();
 
 
 if( $request->hasFile('imagen')){
@@ -73,19 +74,19 @@ if( $request->hasFile('imagen')){
     $destinationpath='images/';
     $filename=time() . '-' . $file->getClientOriginalName();
     $uploadSucces=$request->file('imagen')->move($destinationpath, $filename);
-    $comida->imagen =$destinationpath . $filename ;
+    $mojarra->imagen =$destinationpath . $filename ;
 }
 
         
-        $comida->nombre = $request->input('nombre');
-        $comida->calorias = $request->input('calorias');
+        $mojarra->nombre = $request->input('nombre');
+        $mojarra->calorias = $request->input('calorias');
 
 
        
 
-        $comida->save();
+        $mojarra->save();
 
-        return redirect()->route('comida.index')
+        return redirect()->route('mojarra.index')
             ->with('success', 'Comida created successfully.');
     }
 
@@ -141,7 +142,7 @@ if( $request->hasFile('imagen')){
     {
         $mojarra = Mojarra::find($id)->delete();
 
-        return redirect()->route('mojarras.index')
+        return redirect()->route('mojarra.index')
             ->with('success', 'Mojarra deleted successfully');
     }
     
@@ -151,10 +152,10 @@ if( $request->hasFile('imagen')){
         $selectedIdsArray = explode(',', $selectedIdsString);
 
         $complemento1 = in_array('1', $selectedIdsArray) ? 'Verdura' : null;
-        $complemento2 = in_array('2', $selectedIdsArray) ? 'Arroz' : null;
+        $complemento2 = in_array('4', $selectedIdsArray) ? 'Arroz' : null;
 
         DB::table('pedidos')->insert([
-            'comida' => $comida,
+            'comida' => 'Sopa de camaron',
             'complemento1' => $complemento1,
             'complemento2' => $complemento2,
             'created_at' => now(),

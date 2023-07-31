@@ -152,8 +152,8 @@ if( $request->hasFile('imagen')){
         $selectedIdsString = $request->input('selected_ids', '');
         $selectedIdsArray = explode(',', $selectedIdsString);
 
-        $complemento1 = in_array('1', $selectedIdsArray) ? 'Verdura' : null;
-        $complemento2 = in_array('2', $selectedIdsArray) ? 'Arroz' : null;
+        $complemento1 = in_array('8', $selectedIdsArray) ? 'Verdura' : null;
+        $complemento2 = in_array('9', $selectedIdsArray) ? 'Arroz' : null;
 
         DB::table('pedidos')->insert([
             'comida' => 'pechuga de pollo',

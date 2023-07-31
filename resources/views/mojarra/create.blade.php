@@ -16,7 +16,7 @@
                         <span class="card-title">{{ __('Create') }} Mojarra</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('mojarras.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('mojarra.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
                             @include('mojarra.form')
