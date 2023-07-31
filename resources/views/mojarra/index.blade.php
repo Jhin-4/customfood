@@ -121,7 +121,7 @@
     <div id="modal-container" class="modal">
         <div class="modal-content">
             <span class="close" onclick="hideModal()">&times;</span>
-            <img src="{{ asset('images/inf_camaron.png') }}" alt="Información Nutricional">
+            <img src="{{ asset('images/inf_mojarra.png') }}" alt="Información Nutricional">
         </div>
     </div>
 

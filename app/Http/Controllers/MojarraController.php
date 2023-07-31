@@ -19,7 +19,7 @@ class MojarraController extends Controller
         
         // Recorre los registros seleccionados y suma las calorías
         foreach ($selected as $id) {
-            $mojarra = Comida::find($id);
+            $mojarra = Mojarra::find($id);
             if ($mojarra) {
                 $totalCalories += $mojarra->calorias;
             }
@@ -155,7 +155,7 @@ if( $request->hasFile('imagen')){
         $complemento2 = in_array('4', $selectedIdsArray) ? 'Arroz' : null;
 
         DB::table('pedidos')->insert([
-            'comida' => 'Sopa de camaron',
+            'comida' => 'Mojarra frita',
             'complemento1' => $complemento1,
             'complemento2' => $complemento2,
             'created_at' => now(),

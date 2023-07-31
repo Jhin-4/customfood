@@ -19,9 +19,9 @@ class CamaronController extends Controller
         
         // Recorre los registros seleccionados y suma las calorías
         foreach ($selected as $id) {
-            $comida = Comida::find($id);
-            if ($comida) {
-                $totalCalories += $comida->calorias;
+            $camaron = Camaron::find($id);
+            if ($camaron) {
+                $totalCalories += $camaron->calorias;
             }
         }
         
