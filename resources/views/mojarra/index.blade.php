@@ -57,7 +57,7 @@
                                                 <form action="{{ route('mojarra.destroy', $mojarra->id) }}" method="POST">
                                                     @auth
                                                         <a class="btn btn-sm btn-primary" href="{{ route('mojarra.show', $mojarra->id) }}">
-                                                            <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
+                                                            <i class="fa fa-fw fa-eye"></i> {{ __('Show') }} 
                                                         </a>
                                                         <a class="btn btn-sm btn-success" href="{{ route('mojarra.edit', $mojarra->id) }}">
                                                             <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
@@ -121,7 +121,7 @@
     <div id="modal-container" class="modal">
         <div class="modal-content">
             <span class="close" onclick="hideModal()">&times;</span>
-            <img src="{{ asset('images/1689692175-1689373217-PHOTO-2023-07-14-14-01-42.jpg') }}" alt="Información Nutricional">
+            <img src="{{ asset('images/inf_camaron.png') }}" alt="Información Nutricional">
         </div>
     </div>
 
